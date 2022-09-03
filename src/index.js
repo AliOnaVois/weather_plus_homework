@@ -2,7 +2,7 @@
 let currentDate = new Date();
 let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 let currentDay = days[currentDate.getDay()];
-let date = currentDate.getDate();
+let date = currentDate.getDate().toString().padStart(2, "0");
 let month = (currentDate.getMonth()+1).toString().padStart(2, "0");
 let year = currentDate.getFullYear();
 let hours = (currentDate.getHours()).toString().padStart(2, "0");
