@@ -1,0 +1,174 @@
+body .container {
+    margin: 10px auto;
+    background-color: #69e2ed82;
+    font-family: 'Noto Sans', sans-serif;
+    padding: 0;
+    border-radius: 14px;
+}
+
+h1 {
+    padding: 5px 0;
+    font-size: 50px;
+}
+
+h2 {
+    font-style: italic;
+    font-size: 25px;
+}
+
+.row {
+    margin: 10px auto;
+    padding: 10px;
+    align-self: stretch;
+    margin: 0 auto;
+}
+
+div .button-city {
+    padding: 20px 10px 10px 10px;
+    margin: 0 auto;
+}
+.city {
+    margin: 8px auto;
+    padding: 10px 25px;
+    border: 2px;
+    background-color: #6ec6ef;
+    transition: all 150ms ease-in-out;
+}
+.city:hover {
+    background-color: #f4f470;
+}
+#city-position {
+    margin: 8px auto;
+    padding: 10px 10px;
+    border: 2px;
+    background-color: #6ec6ef;
+    transition: all 150ms ease-in-out;
+}
+#city-position:hover {
+    background-color: #f4f470;
+}
+.fa-globe {
+    color: #08e1f582;;
+}
+
+.form-search {
+    margin: 6px auto;
+    padding: 5px 30px;
+}
+
+.date {
+    font-size: 30px;
+}
+
+.day {
+    font-style: italic;
+    font-size: 25px;
+}
+
+.card-body {
+text-align: center;
+background-color: #6ec6ef;
+}
+
+.col {
+    margin: 5px auto;
+}
+
+div .meteorologi {
+    align-self: center;
+    top: 100px;
+    left: 50px;
+}
+
+.dragon-icon {
+    margin: 3px 0;
+    padding: 3px 0;
+    color: #2bae34;
+}
+
+.wind-icon {
+    position: relative;
+    top: -10px;
+}
+
+div .c-f-icon {
+    margin: 8px auto 2px;
+    padding: 3px 85px 3px 3px;
+    text-align: center;
+}
+
+.fa-scale-unbalanced-flip {
+    color: #d24044;
+}
+.fa-scale-unbalanced {
+    color: #e39c9f;
+}
+
+#wrapper {
+    padding: 1px;
+    margin: 1px auto;
+    display: inline-block;
+    align-items: stretch;
+}
+
+.btn {
+    padding: 10px 10px;
+    border: none;
+    margin: 4px 4px;
+    background-color: #6ec6ef;
+    align-items: stretch;
+    font-size: 13px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.celsius {
+    margin: 5px auto;
+    padding: 7px 13px;
+    border: 1px;
+    background-color: #f4f470;
+    transition: all 150ms ease-in-out;
+    }
+    
+.celsius:focus {
+        background-color: #6ec6ef;
+    }
+
+.fahrenheit {
+     margin: 5px auto;
+     padding: 7px 10px;
+     border: 1px;
+     background-color: #6ec6ef;
+     transition: all 150ms ease-in-out;
+ }
+.fahrenheit:focus {
+     background-color: #f4f470;
+ }
+.temperature-main {
+    margin: 0 auto;
+    background-color: #6ec6ef;
+    text-align: center;
+}
+
+#temp-description {
+    text-transform: capitalize;
+}
+
+.sun-icon {
+    padding: 0 0 10px 0;
+    margin: 5px auto;
+    color: #f4f470;
+}
+
+.week {
+    color: #f4f470;
+}
+
+.name {
+    margin: 15px auto 5px;
+    padding: 5px;
+    text-align: center;
+    font-size: 10px;
+}
