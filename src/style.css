@@ -7,7 +7,7 @@ body .container {
 }
 
 h1 {
-    padding: 5px 0;
+    padding: 15px 0 5px 0;
     font-size: 50px;
 }
 
@@ -24,7 +24,7 @@ h2 {
 }
 
 div .button-city {
-    padding: 20px 10px 10px 10px;
+    padding: 15px 10px 5px 10px;
     margin: 0 auto;
 }
 .city {
@@ -52,22 +52,37 @@ div .button-city {
 }
 
 .form-search {
-    margin: 6px auto;
-    padding: 5px 30px;
+    margin: 2px auto;
+    padding: 2px 30px;
+}
+#button-search {
+    color: black;
+    font-size: medium;
 }
 
 .date {
-    font-size: 30px;
-}
-
+     padding: 5px 0;
+ }
 .day {
+     padding: 5px 0;
+ }
+.time {
+    padding: 5px 0; 
+}
+#date {
+    font-size: 25px;
+}
+#day {
     font-style: italic;
     font-size: 25px;
 }
+#time {
+    font-size: 20px;
+}
 
 .card-body {
-text-align: center;
-background-color: #6ec6ef;
+    text-align: center;
+    background-color: #6ec6ef;
 }
 
 .col {
@@ -97,7 +112,7 @@ div .c-f-icon {
     text-align: center;
 }
 
-.fa-scale-unbalanced-flip {
+#scale-icon {
     color: #d24044;
 }
 .fa-scale-unbalanced {
@@ -130,12 +145,10 @@ div .c-f-icon {
     border: 1px;
     background-color: #f4f470;
     transition: all 150ms ease-in-out;
-    }
-    
+    }  
 .celsius:focus {
         background-color: #6ec6ef;
     }
-
 .fahrenheit {
      margin: 5px auto;
      padding: 7px 10px;
@@ -146,6 +159,7 @@ div .c-f-icon {
 .fahrenheit:focus {
      background-color: #f4f470;
  }
+
 .temperature-main {
     margin: 0 auto;
     background-color: #6ec6ef;
@@ -153,7 +167,14 @@ div .c-f-icon {
 }
 
 #temp-description {
+    margin: 2px auto;
     text-transform: capitalize;
+}
+img {
+    padding: 0 0 15px 0;
+}
+#icon {
+    font-weight: 20px;
 }
 
 .sun-icon {

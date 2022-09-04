@@ -1,4 +1,5 @@
 //document.write(myDate)
+
 let currentDate = new Date();
 let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 let currentDay = days[currentDate.getDay()];
@@ -11,7 +12,7 @@ let minutes = (currentDate.getMinutes()).toString().padStart(2, "0");
 function formatDate() {
   return fullDate
 }
-let userDate = document.querySelector(".date");
+let userDate = document.querySelector("#date");
 userDate.innerHTML = `${date}.${month}.${year}`;
 let fullDate = userDate.innerHTML;
 formatDate();
@@ -19,7 +20,7 @@ formatDate();
 function formatDay() {
   return weekDay;
 }
-let day = document.querySelector(".day");
+let day = document.querySelector("#day");
 day.innerHTML = currentDay;
 let weekDay = day.innerHTML;
 formatDay();
@@ -27,10 +28,27 @@ formatDay();
 function formatTime() {
   return fullTime
 }
-let userTime = document.querySelector(".time");
-userTime.innerHTML = `time ${hours}:${minutes}`;
+let userTime = document.querySelector("#time");
+userTime.innerHTML = `${hours}:${minutes}`;
 let fullTime = userTime.innerHTML;
 formatTime();
+
+/*
+function formatDate(timestamp) {
+  let date = new Date(timestamp);
+  let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  let day = days[currentDate.getDay()];
+  //let date = currentDate.getDate().toString().padStart(2, "0");
+  let month = (date.getMonth()+1).toString().padStart(2, "0");
+  let year = date.getFullYear();
+  let hours = (date.getHours()).toString().padStart(2, "0");
+  let minutes = (date.getMinutes()).toString().padStart(2, "0");
+  
+  return fullDate = `${date}.${month}.${year}`;
+  //return weekDay = day;
+  //return fullTime = `${hours}:${minutes}`;
+}
+*/
 
 //Data Locations & Temperature
 let apiWeatherKey = "08d08cd55f188d3e8f4f52e96493f678";
@@ -59,9 +77,16 @@ function displayWeatherUserForm(response) {
   document.querySelector(".region").innerHTML = `Country: ${response.data.sys.country}`;
   document.querySelector("h1 span#temperature").innerHTML = Math.round(response.data.main.temp);
   document.querySelector("#temp-description").innerHTML = response.data.weather[0].description;
-  //document.querySelector("#icon-weather-main").innerHTML = response.data.weather[0].icon;
-  document.querySelector("#wind-value").innerHTML = response.data.wind.speed;
+  document.querySelector("#wind-value").innerHTML = Math.round(response.data.wind.speed);
   document.querySelector("#humidity-value").innerHTML = response.data.main.humidity;
+  document.querySelector("#icon").setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+  document.querySelector("#unit").innerHTML = "&deg;C";
+  document.querySelector("#icon").setAttribute("alt", response.data.weather[0].description);
+
+  celsiusTemperature = response.data.main.temp;
+  //document.querySelector("#date").innerHTML = formatDate(response.data.dt * 1000);
+  //document.querySelector("#day").innerHTML = formatDate(response.day.dt * 1000);
+  //document.querySelector("#time").innerHTML = formatDate(response.time.dt * 1000);
 }
 
 let formCity = document.querySelector("#form-search-city");
@@ -82,20 +107,20 @@ function getCurrentLocation(event) {
 }
 
 function showTemperatureCurrentLoc(response) {
-  console.log(response);
     let temperature = Math.round(response.data.main.temp);
     let description = response.data.weather[0].description;
     let city = response.data.name;
     let countryCode = response.data.sys.country;
     //let iconWeatherCurrent = response.data.weather[0].icon;
-    let windCurrent = response.data.wind.speed;
+    let windCurrent = Math.round(response.data.wind.speed);
     let humidityCurrent = response.data.main.humidity;
+
+    celsiusTemperature = response.data.main.temp;
     
     let temperatureElement = document.querySelector("h1 span#temperature");
     let tempDescription = document.querySelector("#temp-description");
     let cityUser = document.querySelector("#city-user");
     let userCountry = document.querySelector(".region");
-    //let iconWeather = document.querySelector("#icon-weather-main");
     let windValue = document.querySelector("#wind-value");
     let humidityValue = document.querySelector("#humidity-value");
 
@@ -106,13 +131,16 @@ function showTemperatureCurrentLoc(response) {
     //iconWeather.innerHTML = iconWeatherCurrent;
     windValue.innerHTML = windCurrent;
     humidityValue.innerHTML = humidityCurrent;
+    document.querySelector("#icon").setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+    document.querySelector("#unit").innerHTML = "&deg;C";
+    document.querySelector("#icon").setAttribute("alt", response.data.weather[0].description);
   }
   
   let buttonCurrentLoc = document.querySelector("#city-position");
   buttonCurrentLoc.addEventListener("click", getCurrentLocation);
 
   //get position Button Cities
-  //NK
+  //NK (default)
   function showLocationCityNK(event) {
     event.preventDefault();
     let city = "Nova Kakhovka";
@@ -125,9 +153,14 @@ function showTemperatureCurrentLoc(response) {
       document.querySelector(".region").innerHTML = "Kherson region UA";
       document.querySelector("h1 span#temperature").innerHTML = Math.round(response.data.main.temp);
       document.querySelector("#temp-description").innerHTML = response.data.weather[0].description;
-      //document.querySelector("#icon-weather-main").innerHTML = response.data.weather[0].icon;
-      document.querySelector("#wind-value").innerHTML = response.data.wind.speed;
+      document.querySelector("#wind-value").innerHTML = Math.round(response.data.wind.speed);
       document.querySelector("#humidity-value").innerHTML = response.data.main.humidity;
+      document.querySelector("#date").innerHTML = formatDate(response.data.dt * 1000);
+      document.querySelector("#icon").setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+      document.querySelector("#unit").innerHTML = "&deg;C";
+      document.querySelector("#icon").setAttribute("alt", response.data.weather[0].description);
+
+      celsiusTemperature = response.data.main.temp;
   }
 
   let buttonNovaKakhovka = document.querySelector("#nova-kakhovka");
@@ -146,9 +179,13 @@ function showTemperatureCurrentLoc(response) {
       document.querySelector(".region").innerHTML = "Ukraine UA";
       document.querySelector("h1 span#temperature").innerHTML = Math.round(response.data.main.temp);
       document.querySelector("#temp-description").innerHTML = response.data.weather[0].description;
-      //document.querySelector("#icon-weather-main").innerHTML = response.data.weather[0].icon;
-      document.querySelector("#wind-value").innerHTML = response.data.wind.speed;
+      document.querySelector("#wind-value").innerHTML = Math.round(response.data.wind.speed);
       document.querySelector("#humidity-value").innerHTML = response.data.main.humidity;
+      document.querySelector("#icon").setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+      document.querySelector("#unit").innerHTML = "&deg;C";
+      document.querySelector("#icon").setAttribute("alt", response.data.weather[0].description);
+
+      celsiusTemperature = response.data.main.temp;
   }
 
   let buttonKherson = document.querySelector("#kherson");
@@ -167,15 +204,53 @@ function showTemperatureCurrentLoc(response) {
       document.querySelector(".region").innerHTML = "Ukraine UA";
       document.querySelector("h1 span#temperature").innerHTML = Math.round(response.data.main.temp);
       document.querySelector("#temp-description").innerHTML = response.data.weather[0].description;
-      //document.querySelector("#icon-weather-main").innerHTML = response.data.weather[0].icon;
-      document.querySelector("#wind-value").innerHTML = response.data.wind.speed;
+      document.querySelector("#wind-value").innerHTML = Math.round(response.data.wind.speed);
       document.querySelector("#humidity-value").innerHTML = response.data.main.humidity;
+      document.querySelector("#icon").setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+      document.querySelector("#unit").innerHTML = "&deg;C";
+      document.querySelector("#icon").setAttribute("alt", response.data.weather[0].description);
+
+      celsiusTemperature = response.data.main.temp;
   }
 
   let buttonKyiv = document.querySelector("#kyiv");
   buttonKyiv.addEventListener("click", showLocationCityKyiv);
 
-
+  function convertToFahrenheit(event) {
+    event.preventDefault();
+    let temperatureElement = document.querySelector("h1 span#temperature");
+    let temperature = temperatureElement.textContent;
+    let temperatureElementUnit = document.querySelector("#unit");
+    let celFarIconElement = document.querySelector("#scale-icon");
+    
+    celsiusLink.classList.remove("active");
+    fahrenheitLink.classList.add("active");
+    
+    temperature = Number(temperature);
+    temperatureElement.textContent = Math.round((celsiusTemperature * 9) / 5 + 32);
+    temperatureElementUnit.innerHTML = "&deg;F";
+    celFarIconElement.setAttribute("i", `class="fa fa-solid fa-scale-unbalanced fa-lg fa-3x"`);
+    //<i class="fa fa-solid fa-scale-unbalanced fa-lg fa-3x" id="icon-fahrenheit"></i>
+  }
+  
+  let fahrenheitLink = document.querySelector("#fahrenheit-link");
+  fahrenheitLink.addEventListener("click", convertToFahrenheit);
+  
+  function convertToСelsius(event) {
+    event.preventDefault();
+    celsiusLink.classList.add("active");
+    fahrenheitLink.classList.remove("active");
+    let temperatureElement = document.querySelector("h1 span#temperature");
+    temperatureElement.innerHTML = Math.round(celsiusTemperature);
+    document.querySelector("#unit").innerHTML = "&deg;C";
+    
+  }
+  
+  let celsiusTemperature = null;
+  
+  let celsiusLink = document.querySelector("#celsius-link");
+  celsiusLink.addEventListener("click", convertToСelsius);
+  
   //navigator.geolocation.getCurrentPosition();
 /*
     let temperature = Math.round(response.data.main.temp);
@@ -196,36 +271,6 @@ function showTemperatureCurrentLoc(response) {
   
   //let cityUserSearch = document.querySelector("#city-position");
   //cityUserSearch.addEventListener("submit", formCitySubmit);
-
-
-function convertToFahrenheit(event) {
-  event.preventDefault();
-  let temperatureElement = document.querySelector("h1 span#temperature");
-  let temperature = temperatureElement.textContent;
-  temperature = Number(temperature);
-  temperatureElement.textContent = Math.round((temperature * 9) / 5 + 32);
-  let temperatureElementUnit = document.querySelector("#unit");
-  temperatureElementUnit.innerHTML = "&deg;F";
-}
-
-let fahrenheitLink = document.querySelector("#fahrenheit-link");
-fahrenheitLink.addEventListener("click", convertToFahrenheit);
-
-/*
-function convertToСelsius(event) {
-  console.log(temperature);
-  event.preventDefault();
-  let temperatureElement = document.querySelector("h1 span#temperature");
-  let temperature = temperatureElement.textContent;
-  temperature = Number(temperature);
-  temperatureElement.textContent = 52;
-  let temperatureElementUnit = document.querySelector("#unit");
-  temperatureElementUnit.innerHTML = "&deg;℃";
-}
-
-let celsiusLink = document.querySelector("#celsius-link");
-celsiusLink.addEventListener("click", convertToСelsius);
-*/
 
 /*
   let apiUrl = здесть прописать урл

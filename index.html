@@ -47,24 +47,30 @@
       </div>
       <div class="form-search">
         <form id="form-search-city">
-          <input type="text" id="input-search" placeholder="Enter your city here" autocomplete="off" autofocus="on"/>
-          <input type="submit" value="Search" id="button-search"/>
+          <input type="text" id="input-search" placeholder="Enter your city here" autocomplete="off" autofocus="on" />
+          <input type="submit" value="Search" id="button-search" class="btn btn-primary" />
         </form>
       </div>
 
       <div class="row">
         <div class="col">
-          <h3 class="city-user" id="city-user">
-            <strong></strong>
+          <h3 class="city-user">
+            <strong id="city-user"></strong>
           </h3>
-          <p class="region" id="region-user"></p> 
-          <h5 class="date">
-            <strong>dd.mm.yyyy</strong>
-          </h5>
-          <h5 class="day">
-            <strong>TodayDay</strong>
-          </h5>
-          <h5 class="time">time hh:mm</h5>
+          <p class="region" id="region-user"></p>
+          <div class="current-date">
+            <h5 class="date">
+              <div>
+                <strong id="date">dd.mm.yyyy</strong>
+              </div>
+              <div class="day">
+                <strong id="day">TodayDay</strong>
+              </div>
+              <div class="time">time
+                <span id="time">hh:mm</span>
+              </div>
+            </h5>
+           </div>
         </div>
 
         <div class="col">
@@ -83,12 +89,13 @@
               <i class="fa humidity-icon fa-3x"> 🐳 </i>
             </div>
           </div>
-          <div class="c-f-icon">
-            &deg;C<i class="fa fa-solid fa-scale-unbalanced-flip fa-3x" id="icon-celsius"></i>
-            <i class="fa fa-solid fa-scale-unbalanced fa-lg" id="icon-fahrenheit"></i>&deg;F
+          <div class="c-f-icon" id="c-f-icon">
+            <span>&deg;C</span>
+            <i class="fa fa-solid fa-scale-unbalanced-flip fa-3x" id="scale-icon"></i>
+            <span>&deg;F</span>
           </div>
           <div class="wrapper c-f-btn" id="wrapper">
-            <a href="#" class="btn" id="celsius-link">&deg;Celsius</a>
+            <a href="#" class="btn active" id="celsius-link">&deg;Celsius</a>
             <a href="#" class="btn" id="fahrenheit-link">&deg;Fahrenheit</a>
           </div>
         </div>
@@ -99,8 +106,10 @@
               <span id="temperature"><strong></strong></span>
               <span id="unit"> &deg;C</span>
             </h1>
-            <p class="temp-description" id="temp-description"><strong>Sunny</strong></p>
-            <i class="fa fa-solid fa-sun sun-icon fa-5x" id="icon-weather-main"></i>
+            <p class="temp-description" id="temp-description"></p>
+            <div class="clearfix weather-temperature" id="icon-weather-main">
+              <img src="" alt="" id="icon" />
+            </div>
           </div>
         </div>
       </div>
