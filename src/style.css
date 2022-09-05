@@ -186,6 +186,9 @@ img {
 .week {
     color: #f4f470;
 }
+.day-forecast {
+    opacity: 0.7;
+}
 
 #name {
     margin: 15px auto 5px;

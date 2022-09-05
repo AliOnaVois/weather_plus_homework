@@ -1,5 +1,4 @@
 //document.write(myDate)
-
 let currentDate = new Date();
 let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 let currentDay = days[currentDate.getDay()];
@@ -10,7 +9,7 @@ let hours = (currentDate.getHours()).toString().padStart(2, "0");
 let minutes = (currentDate.getMinutes()).toString().padStart(2, "0");
 
 function formatDate() {
-  return fullDate
+  return fullDate;
 }
 let userDate = document.querySelector("#date");
 userDate.innerHTML = `${date}.${month}.${year}`;
@@ -26,7 +25,7 @@ let weekDay = day.innerHTML;
 formatDay();
 
 function formatTime() {
-  return fullTime
+  return fullTime;
 }
 let userTime = document.querySelector("#time");
 userTime.innerHTML = `${hours}:${minutes}`;
@@ -57,7 +56,7 @@ let apiWeatherKey = "08d08cd55f188d3e8f4f52e96493f678";
 //get city default
 function cityDefault(city) {
   let apiWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiWeatherKey}&units=metric`;
-  //axios.get(apiWeatherUrl).then(displayWeatherUserForm);
+
   axios.get(apiWeatherUrl).then(showWeatherCityNK);
 }
 cityDefault("Nova Kakhovka");
@@ -84,6 +83,7 @@ function displayWeatherUserForm(response) {
   document.querySelector("#icon").setAttribute("alt", response.data.weather[0].description);
 
   celsiusTemperature = response.data.main.temp;
+  getForecast(response.data.coord);
   //document.querySelector("#date").innerHTML = formatDate(response.data.dt * 1000);
   //document.querySelector("#day").innerHTML = formatDate(response.day.dt * 1000);
   //document.querySelector("#time").innerHTML = formatDate(response.time.dt * 1000);
@@ -111,7 +111,6 @@ function showTemperatureCurrentLoc(response) {
     let description = response.data.weather[0].description;
     let city = response.data.name;
     let countryCode = response.data.sys.country;
-    //let iconWeatherCurrent = response.data.weather[0].icon;
     let windCurrent = Math.round(response.data.wind.speed);
     let humidityCurrent = response.data.main.humidity;
 
@@ -128,12 +127,12 @@ function showTemperatureCurrentLoc(response) {
     tempDescription.innerHTML = description;
     cityUser.innerHTML = city;
     userCountry.innerHTML = `Country: ${countryCode}`;
-    //iconWeather.innerHTML = iconWeatherCurrent;
     windValue.innerHTML = windCurrent;
     humidityValue.innerHTML = humidityCurrent;
     document.querySelector("#icon").setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
     document.querySelector("#unit").innerHTML = "&deg;C";
     document.querySelector("#icon").setAttribute("alt", response.data.weather[0].description);
+    getForecast(response.data.coord);
   }
   
   let buttonCurrentLoc = document.querySelector("#city-position");
@@ -161,6 +160,7 @@ function showTemperatureCurrentLoc(response) {
       document.querySelector("#icon").setAttribute("alt", response.data.weather[0].description);
 
       celsiusTemperature = response.data.main.temp;
+      getForecast(response.data.coord);
   }
 
   let buttonNovaKakhovka = document.querySelector("#nova-kakhovka");
@@ -186,6 +186,7 @@ function showTemperatureCurrentLoc(response) {
       document.querySelector("#icon").setAttribute("alt", response.data.weather[0].description);
 
       celsiusTemperature = response.data.main.temp;
+      getForecast(response.data.coord);
   }
 
   let buttonKherson = document.querySelector("#kherson");
@@ -211,39 +212,97 @@ function showTemperatureCurrentLoc(response) {
       document.querySelector("#icon").setAttribute("alt", response.data.weather[0].description);
 
       celsiusTemperature = response.data.main.temp;
+      getForecast(response.data.coord);
   }
 
   let buttonKyiv = document.querySelector("#kyiv");
   buttonKyiv.addEventListener("click", showLocationCityKyiv);
-
+  
+  //Weather Forecast
+  function formatDayForecast(timestamp) {
+    let date = new Date(timestamp * 1000);
+    let day = date.getDay();
+    let days = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+    
+    return days[day];
+  }
+  
+  function displayForecast(response) {
+    let forecast = response.data.daily;
+    let forecastElement = document.querySelector("#weather-forecast");
+    let forecastHTML = `<div class="row" class="w-100">`;
+    
+    forecast.forEach(function (forecastDay, index) {
+      if (index < 6) {
+        forecastHTML =
+        forecastHTML +
+        `
+        <div class="col-sm">
+        <div class="card">
+        <div class="card-body">
+        <h5 class="card-title day-forecast"><strong>${formatDayForecast(forecastDay.dt)}</strong></h5>
+        <div class="weather-icon-forecast">
+        <img src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png" alt="" id="icon-forecast" width="44" />
+        </div>
+        <p class="card-text temperature-forecast">
+        <span id="temperature-day"><strong>${Math.round(forecastDay.temp.max)}</strong></span>
+        <span id="unit-forecast"><strong> &deg;C</strong></span>
+        <span> | </span>
+        <span id="temperature-night">${Math.round(forecastDay.temp.min)}</span>
+        <span id="unit-forecast"> &deg;C</span>
+        </p>
+        </div>
+        </div>
+        </div>
+        `;
+      }
+    });
+    
+    forecastHTML = forecastHTML + `</div>`;
+    forecastElement.innerHTML = forecastHTML;
+  }
+  
+  function getForecast(coordinates) {
+    let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiWeatherKey}&units=metric`;
+    
+    axios.get(apiUrl).then(displayForecast);
+  }
+  
+  //Temperature celsius-fahrenheit
+  let fahrenheitLink = document.querySelector("#fahrenheit-link");
   function convertToFahrenheit(event) {
     event.preventDefault();
+    celsiusLink.classList.remove("active");
+    fahrenheitLink.classList.add("active");
+
     let temperatureElement = document.querySelector("h1 span#temperature");
-    let temperature = temperatureElement.textContent;
     let temperatureElementUnit = document.querySelector("#unit");
     let celFarIconElement = document.querySelector("#scale-icon");
     
-    celsiusLink.classList.remove("active");
-    fahrenheitLink.classList.add("active");
-    
-    temperature = Number(temperature);
     temperatureElement.textContent = Math.round((celsiusTemperature * 9) / 5 + 32);
     temperatureElementUnit.innerHTML = "&deg;F";
     celFarIconElement.setAttribute("i", `class="fa fa-solid fa-scale-unbalanced fa-lg fa-3x"`);
     //<i class="fa fa-solid fa-scale-unbalanced fa-lg fa-3x" id="icon-fahrenheit"></i>
   }
-  
-  let fahrenheitLink = document.querySelector("#fahrenheit-link");
   fahrenheitLink.addEventListener("click", convertToFahrenheit);
   
   function convertToСelsius(event) {
     event.preventDefault();
     celsiusLink.classList.add("active");
     fahrenheitLink.classList.remove("active");
+
     let temperatureElement = document.querySelector("h1 span#temperature");
+    
     temperatureElement.innerHTML = Math.round(celsiusTemperature);
     document.querySelector("#unit").innerHTML = "&deg;C";
-    
   }
   
   let celsiusTemperature = null;
@@ -251,31 +310,3 @@ function showTemperatureCurrentLoc(response) {
   let celsiusLink = document.querySelector("#celsius-link");
   celsiusLink.addEventListener("click", convertToСelsius);
   
-  //navigator.geolocation.getCurrentPosition();
-/*
-    let temperature = Math.round(response.data.main.temp);
-    let description = response.data.weather[0].description;
-    let countryCode = response.data.sys.country;
-    //let iconWeatherCurrent = response.data.weather[0].icon;
-    let windCurrent = response.data.wind.speed;
-    let humidityCurrent = response.data.main.humidity;
-    
-    let temperatureElement = document.querySelector("h1 span#temperature");
-    let tempDescription = document.querySelector("#temp-description");
-    //let cityUser = document.querySelector("#city-user");
-    let userCountry = document.querySelector(".region");
-    //let iconWeather = document.querySelector("#icon-weather-main");
-    let windValue = document.querySelector("#wind-value");
-    let humidityValue = document.querySelector("#humidity-value");
-*/
-  
-  //let cityUserSearch = document.querySelector("#city-position");
-  //cityUserSearch.addEventListener("submit", formCitySubmit);
-
-/*
-  let apiUrl = здесть прописать урл
-function showTemperature(response) {
-    console.log(response.data);
-}
-axios.get(apiUrl).then(showTemperature)
-*/
