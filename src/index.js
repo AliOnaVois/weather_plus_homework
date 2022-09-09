@@ -1,51 +1,33 @@
 //document.write(myDate)
-let currentDate = new Date();
-let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-let currentDay = days[currentDate.getDay()];
-let date = currentDate.getDate().toString().padStart(2, "0");
-let month = (currentDate.getMonth()+1).toString().padStart(2, "0");
-let year = currentDate.getFullYear();
-let hours = (currentDate.getHours()).toString().padStart(2, "0");
-let minutes = (currentDate.getMinutes()).toString().padStart(2, "0");
 
-function formatDate() {
-  return fullDate;
-}
-let userDate = document.querySelector("#date");
-userDate.innerHTML = `${date}.${month}.${year}`;
-let fullDate = userDate.innerHTML;
-formatDate();
-
-function formatDay() {
-  return weekDay;
-}
-let day = document.querySelector("#day");
-day.innerHTML = currentDay;
-let weekDay = day.innerHTML;
-formatDay();
-
-function formatTime() {
-  return fullTime;
-}
-let userTime = document.querySelector("#time");
-userTime.innerHTML = `${hours}:${minutes}`;
-let fullTime = userTime.innerHTML;
-formatTime();
-
-/*
 function formatDate(timestamp) {
-  let date = new Date(timestamp);
+  let currentDate = new Date(timestamp);
+  let date = currentDate.getDate().toString().padStart(2, "0");
+  let month = (currentDate.getMonth()+1).toString().padStart(2, "0");
+  let year = currentDate.getFullYear();
   let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   let day = days[currentDate.getDay()];
-  //let date = currentDate.getDate().toString().padStart(2, "0");
-  let month = (date.getMonth()+1).toString().padStart(2, "0");
-  let year = date.getFullYear();
-  let hours = (date.getHours()).toString().padStart(2, "0");
-  let minutes = (date.getMinutes()).toString().padStart(2, "0");
+  let hours = (currentDate.getHours()).toString().padStart(2, "0");
+  let minutes = (currentDate.getMinutes()).toString().padStart(2, "0");
+
+  return `${date}.${month}.${year}
+  <div class="day" id="day">${day}<span id="time"> ${hours}:${minutes}</span></div>`;
+}
+
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   
-  return fullDate = `${date}.${month}.${year}`;
-  //return weekDay = day;
-  //return fullTime = `${hours}:${minutes}`;
+  return days[day];
+}
+
+/*
+function formatDay(timestamp) {
+  let currentDate = new Date(timestamp * 1000);
+  let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  let currentDay = days[currentDate.getDay()];
+  return weekDay;
 }
 */
 
@@ -56,7 +38,6 @@ let apiWeatherKey = "08d08cd55f188d3e8f4f52e96493f678";
 //get city default
 function cityDefault(city) {
   let apiWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiWeatherKey}&units=metric`;
-
   axios.get(apiWeatherUrl).then(showWeatherCityNK);
 }
 cityDefault("Nova Kakhovka");
@@ -65,7 +46,6 @@ cityDefault("Nova Kakhovka");
 function formCitySubmit (event) {
   event.preventDefault();
   let city = document.querySelector("#input-search").value;
-  //let countryCode = response.data.sys.country;
   let apiWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiWeatherKey}&units=metric`;
   cityDefault(city);
   axios.get(apiWeatherUrl).then(displayWeatherUserForm);
@@ -81,12 +61,10 @@ function displayWeatherUserForm(response) {
   document.querySelector("#icon").setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
   document.querySelector("#unit").innerHTML = "&deg;C";
   document.querySelector("#icon").setAttribute("alt", response.data.weather[0].description);
+  document.querySelector("#date").innerHTML = formatDate(response.data.dt * 1000);
 
   celsiusTemperature = response.data.main.temp;
   getForecast(response.data.coord);
-  //document.querySelector("#date").innerHTML = formatDate(response.data.dt * 1000);
-  //document.querySelector("#day").innerHTML = formatDate(response.day.dt * 1000);
-  //document.querySelector("#time").innerHTML = formatDate(response.time.dt * 1000);
 }
 
 let formCity = document.querySelector("#form-search-city");
@@ -132,6 +110,9 @@ function showTemperatureCurrentLoc(response) {
     document.querySelector("#icon").setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
     document.querySelector("#unit").innerHTML = "&deg;C";
     document.querySelector("#icon").setAttribute("alt", response.data.weather[0].description);
+    document.querySelector("#date").innerHTML = formatDate(response.data.dt * 1000);
+
+    celsiusTemperature = response.data.main.temp;
     getForecast(response.data.coord);
   }
   
@@ -154,10 +135,10 @@ function showTemperatureCurrentLoc(response) {
       document.querySelector("#temp-description").innerHTML = response.data.weather[0].description;
       document.querySelector("#wind-value").innerHTML = Math.round(response.data.wind.speed);
       document.querySelector("#humidity-value").innerHTML = response.data.main.humidity;
-      document.querySelector("#date").innerHTML = formatDate(response.data.dt * 1000);
       document.querySelector("#icon").setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
       document.querySelector("#unit").innerHTML = "&deg;C";
       document.querySelector("#icon").setAttribute("alt", response.data.weather[0].description);
+      document.querySelector("#date").innerHTML = formatDate(response.data.dt * 1000);
 
       celsiusTemperature = response.data.main.temp;
       getForecast(response.data.coord);
@@ -165,103 +146,34 @@ function showTemperatureCurrentLoc(response) {
 
   let buttonNovaKakhovka = document.querySelector("#nova-kakhovka");
   buttonNovaKakhovka.addEventListener("click", showLocationCityNK);
-
-  //Kherson
-    function showLocationCityKherson(event) {
-    event.preventDefault();
-    let city = "Kherson";
-    let apiWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiWeatherKey}&units=metric`;
-    axios.get(apiWeatherUrl).then(showWeatherCityKherson);
-  }
-
-  function showWeatherCityKherson(response) {
-      document.querySelector("#city-user").innerHTML = "Kherson";
-      document.querySelector(".region").innerHTML = "Ukraine UA";
-      document.querySelector("h1 span#temperature").innerHTML = Math.round(response.data.main.temp);
-      document.querySelector("#temp-description").innerHTML = response.data.weather[0].description;
-      document.querySelector("#wind-value").innerHTML = Math.round(response.data.wind.speed);
-      document.querySelector("#humidity-value").innerHTML = response.data.main.humidity;
-      document.querySelector("#icon").setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
-      document.querySelector("#unit").innerHTML = "&deg;C";
-      document.querySelector("#icon").setAttribute("alt", response.data.weather[0].description);
-
-      celsiusTemperature = response.data.main.temp;
-      getForecast(response.data.coord);
-  }
-
-  let buttonKherson = document.querySelector("#kherson");
-  buttonKherson.addEventListener("click", showLocationCityKherson);
-
-  //Kyiv
-    function showLocationCityKyiv(event) {
-    event.preventDefault();
-    let city = "Kyiv";
-    let apiWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiWeatherKey}&units=metric`;
-    axios.get(apiWeatherUrl).then(showWeatherCityKyiv);
-  }
-
-  function showWeatherCityKyiv(response) {
-      document.querySelector("#city-user").innerHTML = "Kyiv";
-      document.querySelector(".region").innerHTML = "Ukraine UA";
-      document.querySelector("h1 span#temperature").innerHTML = Math.round(response.data.main.temp);
-      document.querySelector("#temp-description").innerHTML = response.data.weather[0].description;
-      document.querySelector("#wind-value").innerHTML = Math.round(response.data.wind.speed);
-      document.querySelector("#humidity-value").innerHTML = response.data.main.humidity;
-      document.querySelector("#icon").setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
-      document.querySelector("#unit").innerHTML = "&deg;C";
-      document.querySelector("#icon").setAttribute("alt", response.data.weather[0].description);
-
-      celsiusTemperature = response.data.main.temp;
-      getForecast(response.data.coord);
-  }
-
-  let buttonKyiv = document.querySelector("#kyiv");
-  buttonKyiv.addEventListener("click", showLocationCityKyiv);
   
   //Weather Forecast
-  function formatDayForecast(timestamp) {
-    let date = new Date(timestamp * 1000);
-    let day = date.getDay();
-    let days = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ];
-    
-    return days[day];
-  }
-  
   function displayForecast(response) {
     let forecast = response.data.daily;
     let forecastElement = document.querySelector("#weather-forecast");
-    let forecastHTML = `<div class="row" class="w-100">`;
+    let forecastHTML = `<div class="col-sm">`;
     
     forecast.forEach(function (forecastDay, index) {
-      if (index < 6) {
+      if ((index > 0) & (index < 6)) {
         forecastHTML =
         forecastHTML +
         `
-        <div class="col-sm">
         <div class="card">
         <div class="card-body">
-        <h5 class="card-title day-forecast"><strong>${formatDayForecast(forecastDay.dt)}</strong></h5>
+        <h5 class="card-title day-forecast"><strong id="day">${formatDay(forecastDay.dt)}</strong></h5>
         <div class="weather-icon-forecast">
         <img src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png" alt="" id="icon-forecast" width="44" />
         </div>
         <p class="card-text temperature-forecast">
-        <span id="temperature-day"><strong>${Math.round(forecastDay.temp.max)}</strong></span>
-        <span id="unit-forecast"><strong> &deg;C</strong></span>
+        <span><strong id="temperature-day>${Math.round(forecastDay.temp.max)}</strong></span>
+        <span><strong id="unit-forecast"> &deg;C</strong></span>
         <span> | </span>
         <span id="temperature-night">${Math.round(forecastDay.temp.min)}</span>
         <span id="unit-forecast"> &deg;C</span>
         </p>
         </div>
         </div>
-        </div>
+
         `;
       }
     });
@@ -271,18 +183,16 @@ function showTemperatureCurrentLoc(response) {
   }
   
   function getForecast(coordinates) {
-    let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiWeatherKey}&units=metric`;
-    
-    axios.get(apiUrl).then(displayForecast);
+    let apiWeatherUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiWeatherKey}&units=metric`;
+    axios.get(apiWeatherUrl).then(displayForecast);
   }
   
   //Temperature celsius-fahrenheit
-  let fahrenheitLink = document.querySelector("#fahrenheit-link");
   function convertToFahrenheit(event) {
     event.preventDefault();
     celsiusLink.classList.remove("active");
     fahrenheitLink.classList.add("active");
-
+    
     let temperatureElement = document.querySelector("h1 span#temperature");
     let temperatureElementUnit = document.querySelector("#unit");
     let celFarIconElement = document.querySelector("#scale-icon");
@@ -292,6 +202,7 @@ function showTemperatureCurrentLoc(response) {
     celFarIconElement.setAttribute("i", `class="fa fa-solid fa-scale-unbalanced fa-lg fa-3x"`);
     //<i class="fa fa-solid fa-scale-unbalanced fa-lg fa-3x" id="icon-fahrenheit"></i>
   }
+  let fahrenheitLink = document.querySelector("#fahrenheit-link");
   fahrenheitLink.addEventListener("click", convertToFahrenheit);
   
   function convertToСelsius(event) {

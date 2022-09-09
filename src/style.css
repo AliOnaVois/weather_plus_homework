@@ -20,7 +20,6 @@ h2 {
     margin: 10px auto;
     padding: 10px;
     align-self: stretch;
-    margin: 0 auto;
 }
 
 div .button-city {
@@ -48,8 +47,52 @@ div .button-city {
     background-color: #f4f470;
 }
 .fa-globe {
-    color: #08e1f582;;
+     color: #08e1f582;
+ }
+.fa-earth-europe {
+    color: #08e1f582;
 }
+
+div .c-f-icon {
+    margin: 5px auto;
+    padding: 20px 60px 5px 10px;
+    text-align: center;
+}
+#scale-icon {
+ color: #d24044;
+}
+.fa-scale-unbalanced {
+ color: #e39c9f;
+}
+.btn {
+    padding: 10px;
+    border: none;
+    background-color: #6ec6ef;
+    font-size: 15px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+.celsius {
+    margin: 5px auto;
+    padding: 7px 13px;
+    border: 1px;
+    background-color: #f4f470;
+    transition: all 150ms ease-in-out;
+    }  
+.celsius:focus {
+        background-color: #6ec6ef;
+    }
+.fahrenheit {
+     margin: 5px auto;
+     padding: 7px 10px;
+     border: 1px;
+     background-color: #6ec6ef;
+     transition: all 150ms ease-in-out;
+ }
+.fahrenheit:focus {
+     background-color: #f4f470;
+    }
 
 .form-search {
     margin: 2px auto;
@@ -73,11 +116,10 @@ div .button-city {
     font-size: 25px;
 }
 #day {
-    font-style: italic;
-    font-size: 25px;
+    font-size: 17px;
 }
 #time {
-    font-size: 20px;
+    font-size: 15px;
 }
 
 .card-body {
@@ -90,6 +132,8 @@ div .button-city {
 }
 
 div .meteorologi {
+    margin: 10px auto;
+    padding: 10px;
     align-self: center;
     top: 100px;
     left: 50px;
@@ -105,60 +149,6 @@ div .meteorologi {
     position: relative;
     top: -10px;
 }
-
-div .c-f-icon {
-    margin: 8px auto 2px;
-    padding: 3px 85px 3px 3px;
-    text-align: center;
-}
-
-#scale-icon {
-    color: #d24044;
-}
-.fa-scale-unbalanced {
-    color: #e39c9f;
-}
-
-#wrapper {
-    padding: 1px;
-    margin: 1px auto;
-    display: inline-block;
-    align-items: stretch;
-}
-
-.btn {
-    padding: 10px 10px;
-    border: none;
-    margin: 4px 4px;
-    background-color: #6ec6ef;
-    align-items: stretch;
-    font-size: 13px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    cursor: pointer;
-}
-
-.celsius {
-    margin: 5px auto;
-    padding: 7px 13px;
-    border: 1px;
-    background-color: #f4f470;
-    transition: all 150ms ease-in-out;
-    }  
-.celsius:focus {
-        background-color: #6ec6ef;
-    }
-.fahrenheit {
-     margin: 5px auto;
-     padding: 7px 10px;
-     border: 1px;
-     background-color: #6ec6ef;
-     transition: all 150ms ease-in-out;
- }
-.fahrenheit:focus {
-     background-color: #f4f470;
- }
 
 .temperature-main {
     margin: 0 auto;

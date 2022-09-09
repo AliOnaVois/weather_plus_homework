@@ -29,11 +29,28 @@
   <body>
     <div class="container">
       <div class="row">
-        <div class="col-8">
+        <div class="col-4">
           <div class="button-city">
-            <button class="city" id="nova-kakhovka"><h2><strong>Nova Kakhovka</strong></h2></button>
-            <button class="city" id="kherson"><h2><strong>Kherson</strong></h2></button>
-            <button class="city" id="kyiv"><h2><strong>Kyiv</strong></h2></button>
+            <button class="city" id="nova-kakhovka">
+              <i class="fa-solid fa-earth-europe fa-3x"></i>
+              <h2><strong>Nova Kakhovka</strong></h2></button>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="c-f-icon" id="c-f-icon">
+            <span>&deg;C</span>
+            <i class="fa fa-solid fa-scale-unbalanced-flip fa-3x" id="scale-icon"></i>
+            <span>&deg;F</span>
+          </div>
+         
+            <div class="row c-f-btn">
+             <div class="col-6">
+              <a href="#" class="btn active" id="celsius-link">&deg;Celsius</a>
+             </div>
+             <div class="col-6">
+              <a href="#" class="btn" id="fahrenheit-link">&deg;Fahrenheit</a>
+             </div>
+            
           </div>
         </div>
         <div class="col-4">
@@ -63,12 +80,6 @@
               <div>
                 <strong id="date">dd.mm.yyyy</strong>
               </div>
-              <div class="day">
-                <strong id="day">TodayDay</strong>
-              </div>
-              <div class="time">time
-                <span id="time">hh:mm</span>
-              </div>
             </h5>
            </div>
         </div>
@@ -89,15 +100,7 @@
               <i class="fa humidity-icon fa-3x"> 🐳 </i>
             </div>
           </div>
-          <div class="c-f-icon" id="c-f-icon">
-            <span>&deg;C</span>
-            <i class="fa fa-solid fa-scale-unbalanced-flip fa-3x" id="scale-icon"></i>
-            <span>&deg;F</span>
-          </div>
-          <div class="wrapper c-f-btn" id="wrapper">
-            <a href="#" class="btn active" id="celsius-link">&deg;Celsius</a>
-            <a href="#" class="btn" id="fahrenheit-link">&deg;Fahrenheit</a>
-          </div>
+          
         </div>
 
         <div class="col">
@@ -114,8 +117,10 @@
         </div>
       </div>
      
-    <div class="container weather-forecast" id="weather-forecast">
-      
+    <div class="container weather-forecast">
+      <div class="row" class="w-100" id="weather-forecast">
+         
+      </div> 
     </div>
 
     <div id="name">
