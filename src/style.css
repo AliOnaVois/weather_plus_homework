@@ -140,6 +140,10 @@ img {
     font-weight: 20px;
 }
 
+.container-weather-forecast {
+    margin: 10px auto;
+    padding: 10px;
+}
 #weather-forecast{
     display: flex;
     flex-wrap: wrap;
@@ -151,8 +155,8 @@ img {
     max-width: 16%;
     min-width: 160px;
     flex-grow: 1;
-    margin: 0 10px 10px;
-    padding: 15px;
+    margin: 0 8px 10px;
+    padding: 12px;
     border: solid 1.5px #6ec6ef;
     text-align: center;
     font-size: 17px;
