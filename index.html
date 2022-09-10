@@ -29,31 +29,24 @@
   <body>
     <div class="container">
       <div class="row">
-        <div class="col-4">
+        <div class="col-3">
           <div class="button-city">
             <button class="city" id="nova-kakhovka">
               <i class="fa-solid fa-earth-europe fa-3x"></i>
               <h2><strong>Nova Kakhovka</strong></h2></button>
           </div>
         </div>
-        <div class="col-4">
-          <div class="c-f-icon" id="c-f-icon">
-            <span>&deg;C</span>
-            <i class="fa fa-solid fa-scale-unbalanced-flip fa-3x" id="scale-icon"></i>
-            <span>&deg;F</span>
+        <div class="col-6">
+          <div class="row">
+          <div class="form-search">
+            <form id="form-search-city">
+              <input class="col-8" type="text" id="input-search" placeholder="Enter your city here" autocomplete="off" autofocus="on" />
+              <input type="submit" value="Search" id="button-search" class="col-4 btn btn-primary" />
+            </form>
           </div>
-         
-            <div class="row c-f-btn">
-             <div class="col-6">
-              <a href="#" class="btn active" id="celsius-link">&deg;Celsius</a>
-             </div>
-             <div class="col-6">
-              <a href="#" class="btn" id="fahrenheit-link">&deg;Fahrenheit</a>
-             </div>
-            
           </div>
         </div>
-        <div class="col-4">
+        <div class="col-3">
           <div class="button-city">
             <button class="city-position" id="city-position">
               <i class="fa fa-solid fa-globe fa-3x"></i>
@@ -61,12 +54,6 @@
             </button>
           </div>
         </div>
-      </div>
-      <div class="form-search">
-        <form id="form-search-city">
-          <input type="text" id="input-search" placeholder="Enter your city here" autocomplete="off" autofocus="on" />
-          <input type="submit" value="Search" id="button-search" class="btn btn-primary" />
-        </form>
       </div>
 
       <div class="row">
@@ -97,10 +84,9 @@
               <span><strong class="humidity" id="humidity-text">Humidity</strong></span>
               <span><strong class="humidity" id="humidity-value"> </strong></span>
               <span><strong class="humidity" id="humidity-unit"> %</strong></span>
-              <i class="fa humidity-icon fa-3x"> 🐳 </i>
+              <img src="imgs/22290spoutingwhale_98736.svg" width="68" id="whale-icon" alt="" />
             </div>
           </div>
-          
         </div>
 
         <div class="col">
@@ -116,10 +102,9 @@
           </div>
         </div>
       </div>
-     
-    <div class="container weather-forecast">
-      <div class="row" class="w-100" id="weather-forecast">
-         
+    <div class="container-weather-forecast">
+      <div class="weather-week-forecast" id="weather-forecast">
+    
       </div> 
     </div>
 

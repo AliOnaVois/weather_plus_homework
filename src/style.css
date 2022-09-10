@@ -28,7 +28,7 @@ div .button-city {
 }
 .city {
     margin: 8px auto;
-    padding: 10px 25px;
+    padding: 10px;
     border: 2px;
     background-color: #6ec6ef;
     transition: all 150ms ease-in-out;
@@ -38,7 +38,7 @@ div .button-city {
 }
 #city-position {
     margin: 8px auto;
-    padding: 10px 10px;
+    padding: 10px;
     border: 2px;
     background-color: #6ec6ef;
     transition: all 150ms ease-in-out;
@@ -53,17 +53,6 @@ div .button-city {
     color: #08e1f582;
 }
 
-div .c-f-icon {
-    margin: 5px auto;
-    padding: 20px 60px 5px 10px;
-    text-align: center;
-}
-#scale-icon {
- color: #d24044;
-}
-.fa-scale-unbalanced {
- color: #e39c9f;
-}
 .btn {
     padding: 10px;
     border: none;
@@ -73,32 +62,18 @@ div .c-f-icon {
     text-decoration: none;
     cursor: pointer;
 }
-.celsius {
-    margin: 5px auto;
-    padding: 7px 13px;
-    border: 1px;
-    background-color: #f4f470;
-    transition: all 150ms ease-in-out;
-    }  
-.celsius:focus {
-        background-color: #6ec6ef;
-    }
-.fahrenheit {
-     margin: 5px auto;
-     padding: 7px 10px;
-     border: 1px;
-     background-color: #6ec6ef;
-     transition: all 150ms ease-in-out;
- }
-.fahrenheit:focus {
-     background-color: #f4f470;
-    }
 
 .form-search {
     margin: 2px auto;
-    padding: 2px 30px;
+    padding: 25px 5px 5px 5px;
+    text-align: center;
+}
+#input-search{
+    padding: 10px 0;
 }
 #button-search {
+    margin: 10px auto;
+    padding: 10px;
     color: black;
     font-size: medium;
 }
@@ -117,14 +92,11 @@ div .c-f-icon {
 }
 #day {
     font-size: 17px;
+    opacity: 0.8;
 }
 #time {
     font-size: 15px;
-}
-
-.card-body {
-    text-align: center;
-    background-color: #6ec6ef;
+    opacity: 0.8;
 }
 
 .col {
@@ -138,16 +110,17 @@ div .meteorologi {
     top: 100px;
     left: 50px;
 }
-
 .dragon-icon {
     margin: 3px 0;
     padding: 3px 0;
     color: #2bae34;
 }
-
 .wind-icon {
     position: relative;
     top: -10px;
+}
+#whale-icon {
+    padding: 3px 0 10px 8px;
 }
 
 .temperature-main {
@@ -161,21 +134,30 @@ div .meteorologi {
     text-transform: capitalize;
 }
 img {
-    padding: 0 0 15px 0;
+    padding: 8px 0 12px 0;
 }
 #icon {
     font-weight: 20px;
 }
 
-.sun-icon {
-    padding: 0 0 10px 0;
-    margin: 5px auto;
-    color: #f4f470;
+#weather-forecast{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+}
+.week-day-forecast {
+    flex-basis: 10%;
+    max-width: 16%;
+    min-width: 160px;
+    flex-grow: 1;
+    margin: 0 10px 10px;
+    padding: 15px;
+    border: solid 1.5px #6ec6ef;
+    text-align: center;
+    font-size: 17px;
 }
 
-.week {
-    color: #f4f470;
-}
 .day-forecast {
     opacity: 0.7;
 }
@@ -184,5 +166,5 @@ img {
     margin: 15px auto 5px;
     padding: 5px;
     text-align: center;
-    font-size: 10px;
+    font-size: 12px;
 }
